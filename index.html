@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+    <style>
+        body { font-family: sans-serif; }
+        table.items input[type=text] { width: 80px; }
+        #settings { margin-bottom: 16px; }
+        #settings label { margin-right: 20px; }
+        #results { margin-top: 24px; }
+        #results table { margin-bottom: 20px; }
+        .mandatory-row { font-weight: bold; }
+        .warn { color: red; font-weight: bold; }
+    </style>
+    </head>
+    <body>
+
+<div id="settings">
+    <h1>Kortz Center Heist Bag Maximizer</h1>
+    <h5>developed by Mazemel with help from EtcherTM and CMajor</h5>
+    <h6>Note: This calculator is based on the current known item prices as of July 21st, 2026.</h6>
+    <label>Hard Mode: <input type="checkbox" id="hardMode" checked></label>
+    <label>Delivery Crate Estimate ($105k-140k): <input type="number" id="bayBias" value="105000" step="1000"></label>
+    <label>Players:
+        <select id="playerCount">
+            <option value="1">1 (Solo)</option>
+            <option value="2">2 (Duo)</option>
+            <option value="4">4 (Squad)</option>
+        </select>
+    </label>
+</div>
+
+<table border="1" cellspacing="0" cellpadding="6" id="itemsTable">
+  <thead>
+    <tr>
+      <th>Formal Name</th>
+      <th>Item ID</th>
+      <th>Floor</th>
+      <th>Price</th>
+      <th>Weight</th>
+      <th>Mandatory?</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>Swingset Study No. LXIX</td><td>BA</td><td>Vault</td><td><input type="text" onChange="check_value(this.id, this.value);" id="price-BA"></td><td><input type="text" id="weight-BA" value="50" readonly></td><td><input type="checkbox" id="mandatory-BA"></td></tr>
+    <tr><td>The Hunter Becomes the Hunted</td><td>BB</td><td>Vault</td><td><input type="text" onChange="check_value(this.id, this.value);" id="price-BB"></td><td><input type="text" id="weight-BB" value="50" readonly></td><td><input type="checkbox" id="mandatory-BB"></td></tr>
+    <tr><td>With Friends Like These</td><td>BC</td><td>Vault</td><td><input type="text" onChange="check_value(this.id, this.value);" id="price-BC"></td><td><input type="text" id="weight-BC" value="50" readonly></td><td><input type="checkbox" id="mandatory-BC"></td></tr>
+    <tr><td>Het Gouden Hondje</td><td>BD</td><td>Vault</td><td><input type="text" onChange="check_value(this.id, this.value);" id="price-BD"></td><td><input type="text" id="weight-BD" value="50" readonly></td><td><input type="checkbox" id="mandatory-BD"></td></tr>
+    <tr><td>Delivery Truck Crate</td><td>BAY</td><td>Loading Bay</td><td><input type="checkbox" id="price-BAY"></td><td><input type="text" id="weight-BAY" value="30" readonly></td><td><input type="checkbox" id="mandatory-BAY"></td></tr>
+    <tr><td>Memento Non Mori</td><td>0A</td><td>Alarm Floor</td><td><input type="text" onChange="check_value(this.id, this.value);" id="price-0A"></td><td><input type="text" id="weight-0A" value="30" readonly></td><td><input type="checkbox" id="mandatory-0A"></td></tr>
+    <tr><td>OEuf de Coquard</td><td>0B</td><td>Alarm Floor</td><td><input type="text" onChange="check_value(this.id, this.value);" id="price-0B"></td><td><input type="text" id="weight-0B" value="20" readonly></td><td><input type="checkbox" id="mandatory-0B"></td></tr>
+    <tr><td>Byzantine Hoops</td><td>0C</td><td>Alarm Floor</td><td><input type="text" onChange="check_value(this.id, this.value);" id="price-0C"></td><td><input type="text" id="weight-0C" value="10" readonly></td><td><input type="checkbox" id="mandatory-0C"></td></tr>
+    <tr><td>Fertility Statue</td><td>1A</td><td>First</td><td><input type="text" onChange="check_value(this.id, this.value);" id="price-1A"></td><td><input type="text" id="weight-1A" value="20" readonly></td><td><input type="checkbox" id="mandatory-1A"></td></tr>
+    <tr><td>Antique Rings</td><td>1B</td><td>First</td><td><input type="text" onChange="check_value(this.id, this.value);" id="price-1B"></td><td><input type="text" id="weight-1B" value="10" readonly></td><td><input type="checkbox" id="mandatory-1B"></td></tr>
+    <tr><td>Antique Bands</td><td>1C</td><td>First</td><td><input type="text" onChange="check_value(this.id, this.value);" id="price-1C"></td><td><input type="text" id="weight-1C" value="10" readonly></td><td><input type="checkbox" id="mandatory-1C"></td></tr>
+    <tr><td>Art Deco Rings</td><td>1D</td><td>First</td><td><input type="text" onChange="check_value(this.id, this.value);" id="price-1D"></td><td><input type="text" id="weight-1D" value="10" readonly></td><td><input type="checkbox" id="mandatory-1D"></td></tr>
+    <tr><td>Orange Crush</td><td>1E</td><td>First</td><td><input type="text" onChange="check_value(this.id, this.value);" id="price-1E"></td><td><input type="text" id="weight-1E" value="50" readonly></td><td><input type="checkbox" id="mandatory-1E"></td></tr>
+    <tr><td>The Chief</td><td>1F</td><td>First</td><td><input type="text" onChange="check_value(this.id, this.value);" id="price-1F"></td><td><input type="text" id="weight-1F" value="50" readonly></td><td><input type="checkbox" id="mandatory-1F"></td></tr>
+    <tr><td>Canis Hominem Edit</td><td>1G</td><td>First</td><td><input type="text" onChange="check_value(this.id, this.value);" id="price-1G"></td><td><input type="text" id="weight-1G" value="50" readonly></td><td><input type="checkbox" id="mandatory-1G"></td></tr>
+    <tr><td>Explain Yourself</td><td>1H</td><td>First</td><td><input type="text" onChange="check_value(this.id, this.value);" id="price-1H"></td><td><input type="text" id="weight-1H" value="50" readonly></td><td><input type="checkbox" id="mandatory-1H"></td></tr>
+    <tr><td>Do You See Me</td><td>1I</td><td>First</td><td><input type="text" onChange="check_value(this.id, this.value);" id="price-1I"></td><td><input type="text" id="weight-1I" value="50" readonly></td><td><input type="checkbox" id="mandatory-1I"></td></tr>
+    <tr><td>La Duchesse</td><td>1J</td><td>First</td><td><input type="text" onChange="check_value(this.id, this.value);" id="price-1J"></td><td><input type="text" id="weight-1J" value="50" readonly></td><td><input type="checkbox" id="mandatory-1J"></td></tr>
+    <tr><td>Pharaonic Bangles</td><td>1K</td><td>First</td><td><input type="text" onChange="check_value(this.id, this.value);" id="price-1K"></td><td><input type="text" id="weight-1K" value="10" readonly></td><td><input type="checkbox" id="mandatory-1K"></td></tr>
+    <tr><td>Coquard Rings</td><td>1L</td><td>First</td><td><input type="text" onChange="check_value(this.id, this.value);" id="price-1L"></td><td><input type="text" id="weight-1L" value="10" readonly></td><td><input type="checkbox" id="mandatory-1L"></td></tr>
+    <tr><td>OEuf de Coquard</td><td>2A</td><td>Second</td><td><input type="text" onChange="check_value(this.id, this.value);" id="price-2A"></td><td><input type="text" id="weight-2A" value="20" readonly></td><td><input type="checkbox" id="mandatory-2A"></td></tr>
+    <tr><td>Coquard Carcanet</td><td>2B</td><td>Second</td><td><input type="text" onChange="check_value(this.id, this.value);" id="price-2B"></td><td><input type="text" id="weight-2B" value="30" readonly></td><td><input type="checkbox" id="mandatory-2B"></td></tr>
+    <tr><td>Horse Statue</td><td>2C</td><td>Second</td><td><input type="text" onChange="check_value(this.id, this.value);" id="price-2C"></td><td><input type="text" id="weight-2C" value="30" readonly></td><td><input type="checkbox" id="mandatory-2C"></td></tr>
+    <tr><td>Coquard Bracelets</td><td>2D</td><td>Second</td><td><input type="text" onChange="check_value(this.id, this.value);" id="price-2D"></td><td><input type="text" id="weight-2D" value="10" readonly></td><td><input type="checkbox" id="mandatory-2D"></td></tr>
+    <tr><td>The Great Circle Back</td><td>2E</td><td>Second Exhibit</td><td><input type="text" onChange="check_value(this.id, this.value);" id="price-2E"></td><td><input type="text" id="weight-2E" value="50" readonly></td><td><input type="checkbox" id="mandatory-2E"></td></tr>
+    <tr><td>Don't Forgo These Blueprints</td><td>2F</td><td>Second Exhibit</td><td><input type="text" onChange="check_value(this.id, this.value);" id="price-2F"></td><td><input type="text" id="weight-2F" value="50" readonly></td><td><input type="checkbox" id="mandatory-2F"></td></tr>
+    <tr><td>Fertility Statue</td><td>2G</td><td>Second Exhibit</td><td><input type="text" onChange="check_value(this.id, this.value);" id="price-2G"></td><td><input type="text" id="weight-2G" value="20" readonly></td><td><input type="checkbox" id="mandatory-2G"></td></tr>
+    <tr><td>Gemstone</td><td>2H</td><td>Second Exhibit</td><td><input type="text" onChange="check_value(this.id, this.value);" id="price-2H"></td><td><input type="text" id="weight-2H" value="30" readonly></td><td><input type="checkbox" id="mandatory-2H"></td></tr>
+    <tr><td>Meteorite Fragment</td><td>2I</td><td>Second Exhibit</td><td><input type="text" onChange="check_value(this.id, this.value);" id="price-2I"></td><td><input type="text" id="weight-2I" value="20" readonly></td><td><input type="checkbox" id="mandatory-2I"></td></tr>
+    <tr><td>Art Deco Circlets</td><td>2J</td><td>Second Exhibit</td><td><input type="text" onChange="check_value(this.id, this.value);" id="price-2J"></td><td><input type="text" id="weight-2J" value="10" readonly></td><td><input type="checkbox" id="mandatory-2J"></td></tr>
+    <tr><td>Venus d'Algernon</td><td>2K</td><td>Second Exhibit</td><td><input type="text" onChange="check_value(this.id, this.value);" id="price-2K"></td><td><input type="text" id="weight-2K" value="30" readonly></td><td><input type="checkbox" id="mandatory-2K"></td></tr>
+    <tr><td>Cooked</td><td>2L</td><td>Second</td><td><input type="text" onChange="check_value(this.id, this.value);" id="price-2L"></td><td><input type="text" id="weight-2L" value="50" readonly></td><td><input type="checkbox" id="mandatory-2L"></td></tr>
+    <tr><td>Sod Off</td><td>2M</td><td>Second</td><td><input type="text" onChange="check_value(this.id, this.value);" id="price-2M"></td><td><input type="text" id="weight-2M" value="50" readonly></td><td><input type="checkbox" id="mandatory-2M"></td></tr>
+  </tbody>
+</table>
+
+<button onclick="run()">Run</button>
+
+<div id="results"></div>
+
+<script>
+
+// These stay for compatibility with check_value()/manual inspection, but run()
+// re-reads the DOM fresh every time so they don't need to be kept in sync by hand.
+prices = {
+    "BA": 0, "BB": 0, "BC": 0, "BD": 0, "BAY": 0,
+    "0A": 0, "0B": 0, "0C": 0,
+    "1A": 0, "1B": 0, "1C": 0, "1D": 0, "1E": 0, "1F": 0, "1G": 0, "1H": 0, "1I": 0, "1J": 0, "1K": 0, "1L": 0,
+    "2A": 0, "2B": 0, "2C": 0, "2D": 0, "2E": 0, "2F": 0, "2G": 0, "2H": 0, "2I": 0, "2J": 0, "2K": 0, "2L": 0, "2M": 0,
+}
+mandatory = {
+    "BA": 0, "BB": 0, "BC": 0, "BD": 0, "BAY": 0,
+    "0A": 0, "0B": 0, "0C": 0,
+    "1A": 0, "1B": 0, "1C": 0, "1D": 0, "1E": 0, "1F": 0, "1G": 0, "1H": 0, "1I": 0, "1J": 0, "1K": 0, "1L": 0,
+    "2A": 0, "2B": 0, "2C": 0, "2D": 0, "2E": 0, "2F": 0, "2G": 0, "2H": 0, "2I": 0, "2J": 0, "2K": 0, "2L": 0, "2M": 0,
+}
+players = 1
+
+// Fill in [min, max] for each item's known valid price range.
+// Leave as [0, 0] for items you haven't figured out a range for yet —
+// [0, 0] is treated as "not configured" and skips validation entirely.
+priceRanges = {
+    "BA": [70000, 92500],
+    "BB": [70000, 92500],
+    "BC": [70000, 92500],
+    "BD": [70000, 92500],
+    "0A": [77500, 100000],
+    "0B": [50000, 64000],
+    "0C": [28000, 35000],
+    "1A": [50000, 64000],
+    "1B": [28000, 35000],
+    "1C": [28000, 35000],
+    "1D": [28000, 35000],
+    "1E": [102500, 122500],
+    "1F": [102500, 122500],
+    "1G": [102500, 122500],
+    "1H": [102500, 122500],
+    "1I": [102500, 122500],
+    "1J": [102500, 122500],
+    "1K": [28000, 35000],
+    "1L": [28000, 35000],
+    "2A": [50000, 64000],
+    "2B": [77500, 100000],
+    "2C": [77500, 100000],
+    "2D": [28000, 35000],
+    "2E": [140000, 162500],
+    "2F": [140000, 162500],
+    "2G": [70000, 96000],
+    "2H": [100000, 127500],
+    "2I": [70000, 96000],
+    "2J": [42000, 53000],
+    "2K": [100000, 127500],
+    "2L": [102500, 122500],
+    "2M": [102500, 122500],
+}
+
+function check_value (itemID, value) {
+    const id = itemID.replace('price-', '');
+    const range = priceRanges[id];
+
+    if (!range) {
+        console.log(`ItemID ${itemID} invalid`);
+        return;
+    }
+
+    const [min, max] = range;
+    const notConfigured = (min === 0 && max === 0);
+
+    if (notConfigured || (min <= value && value <= max) || value == 0) {
+        document.getElementById(itemID).style.backgroundColor = "";
+        prices[id] = value;
+    } else {
+        document.getElementById(itemID).style.backgroundColor = "red";
+    }
+}
+
+/* ---------- read the manifest straight out of the table/inputs ---------- */
+function readItems() {
+    const bayBias = parseInt(document.getElementById('bayBias').value, 10) || 0;
+    const rows = document.querySelectorAll('#itemsTable tbody tr');
+    const items = [];
+
+    rows.forEach(tr => {
+        const cells = tr.querySelectorAll('td');
+        const name = cells[0].textContent.trim();
+        const id = cells[1].textContent.trim();
+        const floor = cells[2].textContent.trim();
+
+        const priceInput = document.getElementById('price-' + id);
+        let price;
+        if (priceInput.type === 'checkbox') {
+            price = priceInput.checked ? bayBias : 0;
+        } else {
+            price = parseFloat(priceInput.value) || 0;
+        }
+        prices[id] = price;
+
+        const weightInput = document.getElementById('weight-' + id);
+        const weight = parseInt(weightInput.value, 10) || 0;
+
+        const isMandatory = document.getElementById('mandatory-' + id).checked;
+        mandatory[id] = isMandatory ? 1 : 0;
+
+        items.push({ name, id, floor, price, weight, mandatory: isMandatory });
+    });
+
+    return items;
+}
+
+/* ---------- 0/1 knapsack (same recursion as the notebook's DP cells) ---------- */
+function knapsack01(pool, cap) {
+    const m = pool.length;
+    if (cap <= 0 || m === 0) return { value: 0, chosen: [] };
+    const dp = [new Int32Array(cap + 1)];
+    for (let i = 1; i <= m; i++) {
+        const w = Math.min(pool[i - 1].weight, cap + 1);
+        const p = pool[i - 1].price;
+        const prevRow = dp[i - 1];
+        const row = new Int32Array(cap + 1);
+        for (let j = 0; j <= cap; j++) {
+            row[j] = (w <= j) ? Math.max(prevRow[j], prevRow[j - w] + p) : prevRow[j];
+        }
+        dp.push(row);
+    }
+    let j = cap;
+    const chosen = [];
+    for (let i = m; i >= 1; i--) {
+        const w = pool[i - 1].weight, p = pool[i - 1].price;
+        if (j >= w && dp[i][j] === dp[i - 1][j - w] + p) {
+            chosen.push(i - 1);
+            j -= w;
+        }
+    }
+    chosen.reverse();
+    return { value: dp[m][cap], chosen };
+}
+
+/* ---------- solo (playerCount 1) / squad (playerCount 4) ---------- */
+function runPooled(allItems, playerCount, hardMode) {
+    let pool = allItems.slice();
+    const capTotal = playerCount * 100;
+    let n = capTotal;
+
+    const mandCountBefore = pool.filter(it => it.mandatory).length;
+    if (playerCount === 1) {
+        pool = pool.filter(it => it.floor !== 'Second Exhibit');
+    }
+    const mandCountAfter = pool.filter(it => it.mandatory).length;
+    const getMandatory = mandCountAfter === mandCountBefore;
+
+    let maxValue = 0;
+    const forced = [];
+    if (getMandatory) {
+        if (playerCount === 1) maxValue += hardMode ? 100000 : 50000;
+        const remaining = [];
+        pool.forEach(it => {
+            if (it.mandatory) { forced.push(it); maxValue += it.price; n -= it.weight; }
+            else remaining.push(it);
+        });
+        pool = remaining;
+    }
+
+    if (n < 0) {
+        return { error: 'Mandatory items alone exceed capacity for this crew size.' };
+    }
+
+    const { value, chosen } = knapsack01(pool, n);
+    maxValue += value;
+    const chosenItems = forced.concat(chosen.map(idx => pool[idx]));
+
+    let payout, breakdown;
+    if (playerCount === 1) {
+        payout = maxValue;
+        breakdown = `Solo payout, capacity ${capTotal}`;
+    } else {
+        const buyerBonus = hardMode ? 100000 : 50000;
+        const avg = maxValue / playerCount;
+        payout = avg + buyerBonus;
+        breakdown = `$${Math.round(avg).toLocaleString()} avg take + $${buyerBonus.toLocaleString()} buyer bonus`;
+    }
+
+    return {
+        mode: playerCount === 1 ? 'solo' : 'squad',
+        totalValue: maxValue,
+        payout, breakdown,
+        manifests: [{ label: playerCount === 1 ? 'Bag' : `Pooled Take (÷${playerCount})`, items: chosenItems, capacity: capTotal }]
+    };
+}
+
+/* ---------- duo: exact 2D DP, equivalent to the notebook's PuLP ILP ---------- */
+function runDuo(allItems, hardMode) {
+    const pool = allItems.slice();
+    const cap1 = 100, cap2 = 100;
+    const restricted = it => ['Second Exhibit', 'Second'].includes(it.floor);
+
+    const NEG = -Infinity;
+    let prev = Array.from({ length: cap1 + 1 }, () => new Array(cap2 + 1).fill(0));
+    const choiceLayers = [];
+
+    for (let i = 0; i < pool.length; i++) {
+        const it = pool[i];
+        const w = it.weight, p = it.price;
+        const canP1 = !restricted(it);
+        const cur = Array.from({ length: cap1 + 1 }, () => new Array(cap2 + 1).fill(0));
+        const ch = Array.from({ length: cap1 + 1 }, () => new Array(cap2 + 1).fill(0));
+        for (let w1 = 0; w1 <= cap1; w1++) {
+            for (let w2 = 0; w2 <= cap2; w2++) {
+                let best = prev[w1][w2], bestC = 0;
+                if (canP1 && w1 >= w && prev[w1 - w][w2] !== NEG) {
+                    const val = prev[w1 - w][w2] + p;
+                    if (val > best) { best = val; bestC = 1; }
+                }
+                if (w2 >= w && prev[w1][w2 - w] !== NEG) {
+                    const val = prev[w1][w2 - w] + p;
+                    if (val > best) { best = val; bestC = 2; }
+                }
+                if (it.mandatory && bestC === 0) { best = NEG; }
+                cur[w1][w2] = best; ch[w1][w2] = bestC;
+            }
+        }
+        choiceLayers.push(ch);
+        prev = cur;
+    }
+
+    if (prev[cap1][cap2] === NEG) {
+        return { error: "No feasible split exists — required items can't all be placed under floor/weight constraints." };
+    }
+
+    let w1 = cap1, w2 = cap2;
+    const p1Items = [], p2Items = [];
+    for (let i = pool.length - 1; i >= 0; i--) {
+        const c = choiceLayers[i][w1][w2];
+        const it = pool[i];
+        if (c === 1) { p1Items.unshift(it); w1 -= it.weight; }
+        else if (c === 2) { p2Items.unshift(it); w2 -= it.weight; }
+    }
+
+    const buyerBonus = hardMode ? 100000 : 50000;
+    const p1Value = p1Items.reduce((s, it) => s + it.price, 0);
+    const p2Value = p2Items.reduce((s, it) => s + it.price, 0);
+
+    return {
+        mode: 'duo',
+        totalValue: p1Value + p2Value,
+        manifests: [
+            { label: `Player 1 — Payout $${(p1Value + buyerBonus).toLocaleString()}`, sub: `$${p1Value.toLocaleString()} + $${buyerBonus.toLocaleString()} buyer bonus`, items: p1Items, capacity: cap1 },
+            { label: `Player 2 — Payout $${(p2Value + buyerBonus).toLocaleString()}`, sub: `$${p2Value.toLocaleString()} + $${buyerBonus.toLocaleString()} buyer bonus`, items: p2Items, capacity: cap2 },
+        ]
+    };
+}
+
+/* ---------- rendering ---------- */
+function weightUsed(items) { return items.reduce((s, it) => s + it.weight, 0); }
+
+function manifestHtml(m) {
+    const rows = m.items.map(it => `
+        <tr class="${it.mandatory ? 'mandatory-row' : ''}">
+            <td>${it.mandatory ? '★ ' : ''}${it.name}</td>
+            <td>${it.id}</td>
+            <td>${it.floor}</td>
+            <td>$${it.price.toLocaleString()}</td>
+            <td>${it.weight}</td>
+        </tr>`).join('');
+    return `
+        <h3>${m.label}</h3>
+        ${m.sub ? `<div>${m.sub}</div>` : ''}
+        <table border="1" cellspacing="0" cellpadding="6">
+            <thead><tr><th>Name</th><th>ID</th><th>Floor</th><th>Price</th><th>Weight</th></tr></thead>
+            <tbody>${rows || '<tr><td colspan="5">No items selected</td></tr>'}</tbody>
+        </table>
+        <div>Capacity used: ${weightUsed(m.items)} / ${m.capacity}</div>`;
+}
+
+function renderResults(result) {
+    const box = document.getElementById('results');
+    if (result.error) {
+        box.innerHTML = `<p class="warn">${result.error}</p>`;
+        return;
+    }
+
+    let payoutHtml = '';
+    if (result.mode === 'solo') {
+        payoutHtml = `<h2>Maximum Heist Payout: $${result.payout.toLocaleString()}</h2><div>${result.breakdown}</div>`;
+    } else if (result.mode === 'squad') {
+        payoutHtml = `<h2>Total Bag Value: $${result.totalValue.toLocaleString()}</h2>
+                       <h2>Payout Per Player: $${Math.round(result.payout).toLocaleString()}</h2>
+                       <div>${result.breakdown}</div>`;
+    } else {
+        payoutHtml = `<h2>Total Combined Secondary Value: $${result.totalValue.toLocaleString()}</h2>`;
+    }
+
+    box.innerHTML = payoutHtml + result.manifests.map(manifestHtml).join('<br>');
+}
+
+/* ---------- run ---------- */
+function run() {
+    players = parseInt(document.getElementById('playerCount').value, 10);
+    const hardMode = document.getElementById('hardMode').checked;
+    const allItems = readItems();
+
+    let result;
+    if (players === 1) result = runPooled(allItems, 1, hardMode);
+    else if (players === 4) result = runPooled(allItems, 4, hardMode);
+    else result = runDuo(allItems, hardMode);
+
+    renderResults(result);
+}
+
+</script>
+    </body>
+</html>
